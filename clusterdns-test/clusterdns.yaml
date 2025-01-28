@@ -4,6 +4,4 @@ metadata:
   name: default
 spec:
   upstreamNameservers:
-    - serverIP: 8.8.8.8 #{to change}
-    - serverIP: 8.8.4.4 # {to change}
-    - 
+    - serverIP: 1.1.1.1 #{to change}    
