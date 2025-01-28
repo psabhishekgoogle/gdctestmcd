@@ -1,0 +1,7 @@
+apiVersion: networking.gke.io/v1alpha1
+kind: ClusterDNS
+metadata:
+  name: default
+spec:
+  upstreamNameservers:
+    - serverIP: 1.1.1.1 #{to change}    
