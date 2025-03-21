@@ -2,7 +2,6 @@ apiVersion: vm.cluster.gke.io/v1
 kind: VirtualMachineType
 metadata:
   name: custom-vm-type
-  namespace: mcdonaldstest
 spec:
   cpu: 2
   memory: 4Gi
