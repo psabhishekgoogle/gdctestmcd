@@ -1,0 +1,8 @@
+apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachineDisk
+metadata:
+  name: boot-disk-pvc
+  namespace: mcdonaldstest
+spec:
+  persistentVolumeClaim:
+    claimName: boot-pvc
