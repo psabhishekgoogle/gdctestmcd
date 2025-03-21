@@ -11,7 +11,7 @@ spec:
     virtualMachineTypeName: small-2-20
   interfaces:
     - name: eth0
-      networkName: my-network
+      networkName: pod-network
       default: true
   disks:
     - virtualMachineDiskName: ubuntu-main-disk
