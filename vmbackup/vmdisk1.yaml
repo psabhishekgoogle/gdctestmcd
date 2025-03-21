@@ -5,7 +5,7 @@ metadata:
   namespace: mcdonaldstest
 spec:
   size: 20Gi
-  storageClassName: robin
+  storageClassName: robin-block-immediate
   diskType: cdrom
   source:
     http:
