@@ -1,0 +1,8 @@
+apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachineDisk
+metadata:
+  name: "ubuntu-main-disk"
+  namespace: mcdonaldstest
+spec:
+  size: 25Gi
+  storageClassName: robin-block-immediate
