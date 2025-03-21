@@ -1,7 +1,9 @@
 apiVersion: vm.cluster.gke.io/v1
 kind: VirtualMachineType
 metadata:
-  name: custom-vm-type
+  name: small-2-20
 spec:
-  cpu: 2
-  memory: 4Gi
+  cpu:
+    vcpus: 2
+  memory:
+    capacity: 20Gi
