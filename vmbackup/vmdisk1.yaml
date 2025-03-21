@@ -1,0 +1,8 @@
+apiVersion: vm.cluster.gke.io/v1
+kind: VirtualMachineDisk
+metadata:
+  name: "ubuntu-iso-disk"
+  namespace: mcdonaldstest
+spec:
+  persistentVolumeClaimName: iso-ubuntu
+  diskType: cdrom
