@@ -4,5 +4,4 @@ metadata:
   name: boot-disk-pvc
   namespace: mcdonaldstest
 spec:
-  persistentVolumeClaim:
-    claimName: boot-pvc
+  persistentVolumeClaim: boot-pvc
