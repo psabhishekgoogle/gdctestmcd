@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-config
+data:
+  RETENTION_TOTAL: ""
+  LIST_OF_PVC_NAMES: ""
+  SCHEDULE: ""
