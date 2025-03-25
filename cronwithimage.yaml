@@ -103,7 +103,7 @@ spec:
                 configMapKeyRef:
                   key: LIST_OF_PVC_NAMES
                   name: snapshot-config-fcbbgh54d9
-            image: gcr.io/gdc-solutions-customer-sim/volume-snapshots:0.1.0
+            image: gcr.io/projname/volume-snapshots:0.1.0
             name: snapshot-container
           restartPolicy: OnFailure
           serviceAccountName: cronjob-volumesnapshot-sa
