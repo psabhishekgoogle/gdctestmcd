@@ -1,0 +1,110 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cronjob-volumesnapshot-sa
+  namespace: mcdonaldstest
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: volumesnapshot-role
+  namespace: mcdonaldstest
+rules:
+- apiGroups:
+  - snapshot.storage.k8s.io
+  resources:
+  - volumesnapshots
+  - volumesnapshotcontents
+  verbs:
+  - get
+  - list
+  - create
+  - delete
+- apiGroups:
+  - ""
+  resources:
+  - persistentvolumeclaims
+  verbs:
+  - get
+  - list
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: volumesnapshotclass-cluster-role
+rules:
+- apiGroups:
+  - snapshot.storage.k8s.io
+  resources:
+  - volumesnapshotclasses
+  verbs:
+  - get
+  - list
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: cronjob_volumesnapshot_rb
+  namespace: mcdonaldstest
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: volumesnapshot-role
+subjects:
+- kind: ServiceAccount
+  name: cronjob-volumesnapshot-sa
+  namespace: mcdonaldstest
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: volumesnapshotclass-cluster-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: volumesnapshotclass-cluster-role
+subjects:
+- kind: ServiceAccount
+  name: cronjob-volumesnapshot-sa
+  namespace: mcdonaldstest
+---
+apiVersion: v1
+data:
+  LIST_OF_PVC_NAMES: '["ubuntu-iso-disk","ubuntu-main-disk"]'
+  RETENTION_TOTAL: "1"
+  SCHEDULE: '*/30 * * * *'
+kind: ConfigMap
+metadata:
+  labels:
+    app-config: snapshot-config
+    generated-by-kustomize: "true"
+  name: snapshot-config-fcbbgh54d9
+  namespace: mcdonaldstest
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: pvc-snapshot-cronjob
+  namespace: mcdonaldstest
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - env:
+            - name: RETENTION_TOTAL
+              valueFrom:
+                configMapKeyRef:
+                  key: RETENTION_TOTAL
+                  name: snapshot-config-fcbbgh54d9
+            - name: LIST_OF_PVC_NAMES
+              valueFrom:
+                configMapKeyRef:
+                  key: LIST_OF_PVC_NAMES
+                  name: snapshot-config-fcbbgh54d9
+            image: gcr.io/gdc-solutions-customer-sim/volume-snapshots:0.1.0
+            name: snapshot-container
+          restartPolicy: OnFailure
+          serviceAccountName: cronjob-volumesnapshot-sa
+  schedule: '*/3 * * * *'
