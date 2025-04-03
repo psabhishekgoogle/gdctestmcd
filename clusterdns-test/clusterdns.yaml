@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-deployment       # Name of the Deployment object (unique within the namespace)
-  namespace: testrootsync    # Specify the target namespace HERE
+  namespace: testrootsync1    # Specify the target namespace HERE
   labels:
     app: nginx                 # Label for the Deployment itself
 spec:
