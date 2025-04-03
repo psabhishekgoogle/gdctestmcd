@@ -3,7 +3,8 @@ kind: RootSync
 metadata:
   annotations:
     client.lifecycle.config.k8s.io/deletion: detach
-    configsync.gke.io/cluster-name-selector: db-test    
+    configsync.gke.io/cluster-name-selector: db-test
+    managing-repo: cluster-registry
   name: platform
   namespace: config-management-system
 spec:
@@ -23,7 +24,8 @@ kind: RootSync
 metadata:
   annotations:
     client.lifecycle.config.k8s.io/deletion: detach    
-    configsync.gke.io/cluster-name-selector: db-test    
+    configsync.gke.io/cluster-name-selector: db-test
+    managing-repo: cluster-registry
   name: workload
   namespace: config-management-system
 spec:
