@@ -1,0 +1,35 @@
+apiVersion: configsync.gke.io/v1beta1
+kind: RootSync
+metadata:  
+  name: platform
+  namespace: config-management-system
+spec:
+  git:
+    auth: token
+    branch: testroot2
+    dir: /clusterdns-test
+    period: 15s
+    repo: https://github.com/psabhishekgoogle/gdctestmcd
+    revision: v1.10.0-np-platform-cap
+    secretRef:
+      name: github-token
+  sourceFormat: unstructured
+  sourceType: git
+---
+apiVersion: configsync.gke.io/v1beta1
+kind: RootSync
+metadata:    
+  name: workload
+  namespace: config-management-system
+spec:
+  git:
+    auth: token
+    branch: testroot3
+    dir: /clusterdns-test
+    period: 15s
+    repo: https://github.com/psabhishekgoogle/gdctestmcd
+    revision: v1.10.2
+    secretRef:
+      name: github-token
+  sourceFormat: unstructured
+  sourceType: git
