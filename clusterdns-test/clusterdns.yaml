@@ -1,10 +1,24 @@
-apiVersion: networking.gke.io/v1alpha1
-kind: ClusterDNS
+# nginx-deployment-testrootsync.yaml
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: default
+  name: nginx-deployment       # Name of the Deployment object (unique within the namespace)
+  namespace: testrootsync    # Specify the target namespace HERE
+  labels:
+    app: nginx                 # Label for the Deployment itself
 spec:
-  upstreamNameservers:
-    - serverIP: 8.8.8.8
-    - serverIP: 8.8.4.4
-    - serverIP: 2001:4860:4860::8888
-    
+  replicas: 1                  # Ensure exactly one pod is running
+  selector:
+    matchLabels:
+      app: nginx               # Selects pods with this label within the namespace
+  template:
+    # This is the template for the Pod(s) the Deployment will create
+    metadata:
+      labels:
+        app: nginx             # Label applied to the Pod(s), must match spec.selector.matchLabels
+    spec:
+      containers:
+      - name: nginx            # Name of the container within the pod
+        image: nginx:stable-alpine # Use the official Nginx image
+        ports:
+        - containerPort: 80    # Expose port 80 within the container
