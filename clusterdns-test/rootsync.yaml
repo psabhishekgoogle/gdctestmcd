@@ -12,8 +12,7 @@ spec:
     branch: testroot2
     dir: /clusterdns-test
     period: 15s
-    repo: https://github.com/psabhishekgoogle/gdctestmcd
-    revision: v1.10.0-np-platform-cap
+    repo: https://github.com/psabhishekgoogle/gdctestmcd    
     secretRef:
       name: github-token
   sourceFormat: unstructured
@@ -33,8 +32,7 @@ spec:
     branch: testroot3
     dir: /clusterdns-test
     period: 15s
-    repo: https://github.com/psabhishekgoogle/gdctestmcd
-    revision: v1.10.2
+    repo: https://github.com/psabhishekgoogle/gdctestmcd    
     secretRef:
       name: github-token
   sourceFormat: unstructured
